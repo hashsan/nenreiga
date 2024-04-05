@@ -1,11 +1,75 @@
-
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="ja" >
 <head>
   <meta charset="UTF-8">
-  <title>CodePen - A Pen by pinkromeo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="./style.css">
+  <title>年齢が何歳か計算するサイト.JP | 履歴書で求められる年齢は、満年齢が一般的です。</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+input,html{
+  font-size:21px;
+}
+body{
+  margin:1rem;
+}@media screen and (min-width:500px){
+  body{
+    /*if over 500px*/
+    margin:1rem auto;
+    width:500px;
+  }
+}
 
+div#enter,
+div#date{
+  display:flex;
+  justify-content:space-between;
+}
+hr{
+  border:2px solid whitesmoke;
+}
+input{
+  width:100%;
+  line-height:2rem;
+  text-align:center;
+  border:2px solid whitesmoke;
+  background:#fff;
+  outline:none;
+}
+input:focus{
+  border:2px solid #f26;
+}
+input[type="submit"]{
+  padding:0.25rem;
+}
+.c{
+  text-align:center;
+}
+#result{
+  background:whitesmoke;
+  padding:1rem;
+}
+#result input{
+  width:4rem;
+}
+.big{
+  font-size:2rem;
+  line-height:1.3;
+  margin:0;
+}
+.ad{
+  padding:0.5rem;
+}
+a{
+  text-decoration:unset;
+}
+
+figure{
+  text-align:center;
+  font-size:0.5rem;
+}
+figure img{
+  border-radius:100%;
+}    
+  </style>
 </head>
 <body>
 <!-- partial:index.partial.html -->
@@ -50,7 +114,51 @@
 </figure>
 </footer>
 <!-- partial -->
-  <script  src="./script.js"></script>
+  <script>
+var fn={}
+fn.q=d=>document.querySelector(d)
+fn.age = age
+//-----------------------------------------------
+
+fn.q('#calc').onclick=()=>{
+  var yyyy = fn.q('#yyyy').value
+  var mm = fn.q('#mm').value
+  var dd = fn.q('#dd').value
+  var ret =fn.age(yyyy,mm,dd)
+  fn.q('#man').textContent = ret.man
+  fn.q('#kazoe').textContent = ret.kazoe
+  
+}
+
+
+//------------------------------------------------
+function age(yyyy,mm,dd){
+  var born = new Date(yyyy+'-'+mm+'-'+dd)
+  return _age(born)
+}
+function _age(born){
+  var now = new Date();
+  return {
+    kazoe:_kazoe(now,born),
+    man:_man(now,born)
+  }
+  
+  function _kazoe(now,born){
+    return now.getFullYear() - born.getFullYear()
+  }
+  function _man(now,born){
+    var k = _kazoe(now,born)
+    var n = (now.getMonth() + 1) +''+ (''+now.getDate()).padStart(2,'0')
+    var b = (born.getMonth() + 1) +''+ (''+born.getDate()).padStart(2,'0')
+    var diff = parseInt(n) - parseInt(b)
+    //console.log(n,b,diff)
+    if(diff === 0) return k
+    if(diff > 0 ) return k
+    return k - 1;
+  }
+}
+//---------------------------------------------------    
+  </script>
 
 </body>
 </html>
