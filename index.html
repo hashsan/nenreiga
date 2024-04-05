@@ -87,12 +87,20 @@ figure img{
   <section id="input">
     <p class="c">年、月、日の順に入力して下さい。</p>
     <div id="date">
-      <input id="yyyy" type="number" placeholder="年（1982）" min="1900" max="2085"/>
-      <input id="mm" type="number" placeholder="月（5）" value="1"/>
-      <input id="dd" type="number" placeholder="日（12）" value="1"/>
+      <input id="yyyy" type="number" placeholder="年（1982）" min="1900" max="2085"
+       tabindex="1" 
+        />
+      <input id="mm" type="number" placeholder="月（5）" value="1"
+       tabindex="2"         
+        />
+      <input id="dd" type="number" placeholder="日（12）" value="1"
+       tabindex="3"         
+        />
     </div>
     <div id="enter">
-      <input id="calc" type="submit" value="計算する"/>
+      <input id="calc" type="submit" value="計算する"
+       tabindex="4"         
+        />
     </div>
   </section>
   <section>
